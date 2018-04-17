@@ -3,11 +3,12 @@
 @section('title', app_name() . ' | '.__('navs.general.home'))
 
 @section('content')
-
-
-
+  <style media="screen">
+      .test{
+        margin: 20px;
+      }
+  </style>
       <!-- Navigation -->
-
 
       <!-- Page Content -->
       <div class="container">
@@ -29,6 +30,16 @@
               <div class="card-body">
                 <h2 class="card-title">{{$quote->title}}</h2>
                 <p class="card-text">{{$quote->subject}}</p>
+                <div class="flex center">
+                @foreach ($quote->tags as $tag)
+                  @if ($tag->tag_name == "nothing is imposible")
+                    <span class="badge badge-pill badge-danger "><i class="fa fa-tags"></i> {{ $tag->tag_name }}</span>
+                  @endif
+                  @if ($tag->tag_name == "tidak ada yg tidak mungkin")
+                    <span class="badge badge-pill badge-primary"><i class="fa fa-tags"></i> {{ $tag->tag_name }}</span>
+                  @endif
+                @endforeach
+              </div>
                 <a href="{{ url('/show/'.$quote->slug) }}" class="btn btn-primary">Read More &rarr;</a>
               </div>
               <div class="card-footer text-muted">
@@ -72,31 +83,15 @@
             <div class="card my-4">
               <h5 class="card-header">Tags</h5>
               <div class="card-body">
+
                 <div class="row">
-                  <div class="col-lg-6">
+                  <div class="col-lg-10">
                     <ul class="list-unstyled mb-0">
-                      <li>
-                        <a href="#">Web Design</a>
-                      </li>
-                      <li>
-                        <a href="#">HTML</a>
-                      </li>
-                      <li>
-                        <a href="#">Freebies</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-lg-6">
-                    <ul class="list-unstyled mb-0">
-                      <li>
-                        <a href="#">JavaScript</a>
-                      </li>
-                      <li>
-                        <a href="#">CSS</a>
-                      </li>
-                      <li>
-                        <a href="#">Tutorials</a>
-                      </li>
+                      @foreach ($tags as $tag)
+                        <li>
+                          <a href="#">{{$tag->tag_name}}</a>
+                        </li>
+                      @endforeach
                     </ul>
                   </div>
                 </div>

@@ -21,6 +21,8 @@
     {{ style(mix('css/backend.css')) }}
 
     @stack('after-styles')
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 </head>
 
 <body class="{{ config('backend.body_classes') }}">
@@ -54,5 +56,6 @@
     @stack('before-scripts')
     {!! script(mix('js/backend.js')) !!}
     @stack('after-scripts')
+
 </body>
 </html>

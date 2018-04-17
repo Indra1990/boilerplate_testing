@@ -39,5 +39,23 @@ Breadcrumbs::register('admin.quotes.edit', function ($breadcrumbs,$title) {
     $breadcrumbs->push(__('Edit '), route('admin.quotes.edit',$title));
 });
 
+//index tags admin
+Breadcrumbs::register('admin.tags', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.dashboard');
+    $breadcrumbs->push(__('Tags'), route('admin.tags'));
+});
+
+//create tags admin
+Breadcrumbs::register('admin.tags.create', function ($breadcrumbs) {
+    $breadcrumbs->parent('admin.tags');
+    $breadcrumbs->push(__('Create'), route('admin.tags.create'));
+});
+
+//edit tags admin
+Breadcrumbs::register('admin.tags.edit', function ($breadcrumbs,$tag_name) {
+    $breadcrumbs->parent('admin.tags');
+    $breadcrumbs->push(__('Edit'), route('admin.tags.edit',$tag_name));
+});
+
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';

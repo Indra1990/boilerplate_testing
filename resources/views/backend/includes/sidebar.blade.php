@@ -40,8 +40,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('admin/item') }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Item</a></li>
+            {{--    <li class="nav-item"><a class="nav-link" href="{{ url('admin/item') }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Item</a></li>--}}
                 <li class="nav-item"><a class="nav-link" href="{{ url('admin/quotes') }}"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Quotes</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('admin/tags') }}"><i class="fa fa-tags" aria-hidden="true"></i> Tags</a></li>
 
             @endif
 

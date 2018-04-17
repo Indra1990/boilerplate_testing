@@ -23,6 +23,22 @@
                       <textarea class="form-control" name="subject" rows="10" value="{{ $quote->subject}}">{{ (old('subject')) ? old('subject') : $quote->subject }}</textarea>
                     </div>
 
+                    <div id="tag_wrapper" class="form-group">
+                      <label for="no_telp">Tag Maximal 3 :</label>
+                      <div id="add_tag"> Add Tag </div>
+
+                        @foreach ($quote->tags as $oldtag)
+                          <select  id="tag_select" name="tags[]">
+                            <option value="0">Tidak Ada</option>
+                            @foreach ($tags as $tag)
+                              <option value="{{$tag->id}}" @if($oldtag->id == $tag->id) selected="selected" @endif>{{$tag->tag_name}}</option>
+                            @endforeach
+                          </select>
+                        @endforeach
+
+                      <script type="text/javascript" src="{{ asset('js/tag.js') }}"></script>
+                    </div>
+
                     <button type="submit" class="btn btn-success">Submit</button>
                   </form>
 
