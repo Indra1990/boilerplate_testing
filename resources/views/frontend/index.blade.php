@@ -32,14 +32,10 @@
                 <p class="card-text">{{$quote->subject}}</p>
                 <div class="flex center">
                 @foreach ($quote->tags as $tag)
-                  @if ($tag->tag_name == "nothing is imposible")
                     <span class="badge badge-pill badge-danger "><i class="fa fa-tags"></i> {{ $tag->tag_name }}</span>
-                  @endif
-                  @if ($tag->tag_name == "tidak ada yg tidak mungkin")
-                    <span class="badge badge-pill badge-primary"><i class="fa fa-tags"></i> {{ $tag->tag_name }}</span>
-                  @endif
                 @endforeach
               </div>
+              <br>
                 <a href="{{ url('/show/'.$quote->slug) }}" class="btn btn-primary">Read More &rarr;</a>
               </div>
               <div class="card-footer text-muted">

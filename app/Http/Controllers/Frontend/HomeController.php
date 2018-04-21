@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Auth\Quote;
 use App\Models\Auth\User;
 use App\Models\Auth\Tag;
+use App\Models\Auth\Comment;
+use Illuminate\Http\Request;
 
 /**
  * Class HomeController.
@@ -25,8 +27,9 @@ class HomeController extends Controller
 
     public function show($slug)
     {
-       $quote = Quote::where('slug',$slug)->first();
-
-       return view('frontend.show', compact('quote'));
+       $quote = Quote::with('comments.user')->where('slug', $slug)->first();
+       //$quote = Quote::where('slug',$slug)->first();
+       $tags = Tag::all();
+       return view('frontend.show', compact('quote','tags'));
     }
 }

@@ -58,7 +58,6 @@ class QuoteController extends Controller
   public function show($title)
   {
      $quote = Quote::where('title',$title)->first();
-
      return view('backend.quotes.show', compact('quote'));
   }
   public function edit($title)

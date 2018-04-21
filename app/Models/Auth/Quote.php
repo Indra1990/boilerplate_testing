@@ -17,4 +17,10 @@ class Quote extends Model
    {
      return $this->belongsToMany('App\Models\Auth\Tag');
    }
+
+   public function comments()
+  {
+      return $this->hasMany('App\Models\Auth\Comment');
+  }
+
 }

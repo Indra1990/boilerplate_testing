@@ -21,7 +21,10 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         * User Testing Specific
         */
         Route::get('testing', 'TestingController@index')->name('index');
-
+        /*
+        * User auth post comment
+        */
+        Route::post('show/{slug}', 'CommentController@store');
         /*
          * User Dashboard Specific
          */

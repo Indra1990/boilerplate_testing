@@ -45,9 +45,7 @@
                         <td>{{ $quote->title }}</td>
                         <td>{{ $quote->subject}}</td>
                         <td>
-
                           <a href="{{ url('admin/quotes/edit/'.$quote->slug) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-
                           <a href="{{ url('admin/quotes/show/'.$quote->title) }}" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>
                           <button  class="btn btn-danger delete-quote" value="{{$quote->id}}"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
