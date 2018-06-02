@@ -17,13 +17,9 @@
 
           <!-- Blog Entries Column -->
           <div class="col-md-8">
-
-            <h1 class="my-4">Page Heading
-              <small>Secondary Text</small>
-            </h1>
+            @foreach ($quotes as $quote)
 
             <!-- Blog Post -->
-            @foreach ($quotes as $quote)
 
             <div class="card mb-4">
               <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">

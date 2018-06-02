@@ -4,7 +4,7 @@
 namespace App\Models\Auth;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\Auth;
 
 class Comment extends Model
 {
@@ -19,5 +19,13 @@ class Comment extends Model
      {
        return $this->belongsTo('App\Models\Auth\User');
      }
+
+    public function isOwner()
+    {
+   if (Auth::guest()) {
+     return false;
+   }
+   return Auth::user()->id == $this->user->id;
+ }
 
 }

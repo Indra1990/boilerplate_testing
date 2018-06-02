@@ -26,6 +26,16 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         */
         Route::post('show/{slug}', 'CommentController@store');
         /*
+        * User auth edit comment
+        */
+         Route::get('show/{id}/edit', 'CommentController@edit');
+        //  Route::get('show/{slug}/{id}', 'CommentController@edit');
+        /*
+        * User auth update comment
+        */
+       Route::put('show/{id}/edit', 'CommentController@update');
+
+        /*
          * User Dashboard Specific
          */
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');

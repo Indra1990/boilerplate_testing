@@ -3,6 +3,8 @@
 @section('title', app_name() . ' | '.__('navs.general.home'))
 
 @section('content')
+  <meta name="_token" content="{{ csrf_token() }}" />
+
   <!-- Page Content -->
   <div class="container">
 
@@ -27,6 +29,27 @@
 
         <hr>
 
+        <!-- Single Comment -->
+          @foreach ($quote->comments as $comment)
+            <div class="media mb-4" >
+              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+              <div class="media-body">
+                <h5 class="mt-0" >{{$comment->user->name}}</h5>
+                {{ $comment->subject}}
+                <br>
+              {{--<a href="{{url('/show/'.$comment->id.'/edit')}}" class="btn btn-default ">Edit</a>--}}
+            @if ($comment->isOwner())
+              <a href="{{url('/show/'.$comment->id.'/edit')}}"  class="btn btn-primary">Edit</a>
+            @endif
+
+              </div>
+            </div>
+          @endforeach
+          @if(session('msg'))
+            <div class="alert alert-success">
+            <p>{{ session('msg') }}</p>
+            </div>
+          @endif
         <!-- Comments Form -->
         <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>
@@ -41,16 +64,40 @@
           </div>
         </div>
 
-        <!-- Single Comment -->
-        @foreach ($quote->comments as $comment)
-          <div class="media mb-4">
-            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-              <h5 class="mt-0">{{$comment->user->name}}</h5>
-              {{ $comment->subject}}
+
+
+
+
+        <!-- Start Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <form id="frmProducts" name="frmProducts" class="form-horizontal" novalidate="">
+                <div class="form-group error">
+                 <label for="inputName" class="col-sm-3 control-label">Subject</label>
+                   <div class="col-sm-9">
+                    <textarea class="form-control" id="subject" name="subject"></textarea>
+                   </div>
+
+                  </div>
+                 </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
             </div>
           </div>
-        @endforeach
+        </div>
+        <!-- End Modal -->
 
       </div>
 
@@ -99,4 +146,28 @@
     </div>
     <!-- /.container -->
   </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+
+
+  // $('.open_modal').click(function(){
+  //     var comment_id = $(this).val();
+       //var id = $(this).val("id");
+      // console.log(id);
+  //   console.log(comment_id);
+  // //  $.get(url + '/' + comment_id, function (data) {
+  //   $.get(url + '/' + comment_id, function (data) {
+  //
+  //     console.log(data);
+  //         $('#comment_id').val(data.id);
+  //          $('#subject').val(data.subject);
+  //          $('#btn-save').val("update");
+  //          $('#exampleModal').modal('show');
+  //      });
+  //  });
+});
+//   http://www.expertphp.in/article/laravel-5-ajax-crud-example-to-build-web-application-without-page-refresh
+  </script>
 @endsection

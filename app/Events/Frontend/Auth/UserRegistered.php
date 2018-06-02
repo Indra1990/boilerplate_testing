@@ -3,6 +3,8 @@
 namespace App\Events\Frontend\Auth;
 
 use App\Models\Auth\User;
+use Illuminate\Bus\Queueable;
+use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
 /**
@@ -24,4 +26,9 @@ class UserRegistered
     {
         $this->user = $user;
     }
+
+    // public function build()
+    // {
+    //     return $this->view('email.register');
+    // }
 }

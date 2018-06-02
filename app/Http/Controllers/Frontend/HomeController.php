@@ -20,7 +20,7 @@ class HomeController extends Controller
     public function index()
     {
         //$quotes =
-        $quotes = Quote::with('tags')->get();
+        $quotes = Quote::with('tags')->latest()->get();
         $tags = Tag::all();
         return view('frontend.index',compact('quotes','tags'));
     }
