@@ -8,6 +8,7 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('contact', 'ContactController@index')->name('contact');
 Route::post('contact/send', 'ContactController@send')->name('contact.send');
 Route::get('/show/{slug}', 'HomeController@show')->name('show');
+Route::get('/{tag}', 'HomeController@filterTag')->name('filter');
 
 /*
  * These frontend controllers require the user to be logged in

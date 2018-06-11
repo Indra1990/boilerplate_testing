@@ -17,11 +17,20 @@ class HomeController extends Controller
     /**
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        //$quotes =
+      $search = urldecode($request->input('search'));
+      if (!empty($search)) {
+
+        $quotes =Quote::with('tags')->where('title','like','%'.$search.'%')->get();
+        $tags = Tag::all();
+
+      }else {
+
         $quotes = Quote::with('tags')->latest()->get();
         $tags = Tag::all();
+      }
+
         return view('frontend.index',compact('quotes','tags'));
     }
 
@@ -31,5 +40,17 @@ class HomeController extends Controller
        //$quote = Quote::where('slug',$slug)->first();
        $tags = Tag::all();
        return view('frontend.show', compact('quote','tags'));
+    }
+
+    public function filterTag($Tag)
+    {
+
+       $tags = Tag::all();
+
+       $quotes = Quote::with('tags')->whereHas('tags', function($query) use($tag){
+           $query->where('tag_name', $tag);
+           })->get();
+
+      return view('frontend.index', compact('quotes','tags'));
     }
 }

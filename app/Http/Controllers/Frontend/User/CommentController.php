@@ -62,7 +62,7 @@ class CommentController extends Controller
     }else {
       return false;
     }
-    return redirect('show/'.$comment->quote->slug)->withFlashInfo('msg', 'komentar berhasil di update');
+    return redirect('show/'.$comment->quote->slug)->withFlashInfo('Comment Successfully Update');
 
  }
 }
