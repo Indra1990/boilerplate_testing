@@ -28,7 +28,7 @@
                 <p class="card-text">{{$quote->subject}}</p>
                 <div class="flex center">
                 @foreach ($quote->tags as $tag)
-                    <span class="badge badge-pill badge-danger "><i class="fa fa-tags"></i> {{ $tag->tag_name }}</span>
+                  <a href="{{url('/filter/'.$tag->slug)}}"><span class="badge badge-pill badge-danger"><i class="fa fa-tags"></i> {{ $tag->tag_name }}</span></a>
                 @endforeach
               </div>
               <br>
@@ -64,7 +64,7 @@
               <div class="card-body">
                 <form action="{{url('/')}}" method="get">
                 <div class="input-group">
-                  <input type="text" class="form-control" name="search" placeholder="Search for Tags">
+                  <input type="text" class="form-control" name="search" placeholder="Search for Quote">
                   <span class="input-group-btn">
                     <button class="btn btn-secondary" type="submit">Go!</button>
                   </span>
@@ -84,7 +84,7 @@
                     <ul class="list-unstyled mb-0">
                       @foreach ($tags as $tag)
                         <li>
-                          <a href="#">{{$tag->tag_name}}</a>
+                          <a href="{{url('/filter/'.$tag->slug)}}">{{$tag->tag_name}}</a>
                         </li>
                       @endforeach
                     </ul>

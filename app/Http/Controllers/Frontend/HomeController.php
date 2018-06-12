@@ -42,13 +42,13 @@ class HomeController extends Controller
        return view('frontend.show', compact('quote','tags'));
     }
 
-    public function filterTag($Tag)
+    public function filterTag($tag)
     {
 
        $tags = Tag::all();
 
        $quotes = Quote::with('tags')->whereHas('tags', function($query) use($tag){
-           $query->where('tag_name', $tag);
+           $query->where('slug', $tag);
            })->get();
 
       return view('frontend.index', compact('quotes','tags'));

@@ -19,7 +19,12 @@
         <!-- Check if the language is set to RTL, so apply the RTL layouts -->
         <!-- Otherwise apply the normal LTR layouts -->
         {{ style(mix('css/frontend.css')) }}
-
+        <style>
+          .imgComment{
+            height: 60px !important;
+            width: 70px !important;
+          }
+        </style>
         @stack('after-styles')
     </head>
     <body>

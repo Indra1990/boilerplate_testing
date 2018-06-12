@@ -57,12 +57,27 @@ class CommentController extends Controller
      if ($comment->isOwner()) {
 
        $comment->update([
-            'subject' => $request->subject,
-          ]);
+                'subject' => $request->subject,
+              ]);
     }else {
       return false;
     }
     return redirect('show/'.$comment->quote->slug)->withFlashInfo('Comment Successfully Update');
 
  }
+
+   public function destroy($id)
+   {
+     $comment = Comment::find($id);
+
+     if ($comment->isOwner()) {
+       $comment->delete();
+
+     }else {
+       return false;
+     }
+
+     return redirect('show/'.$comment->quote->slug)->withFlashDanger('Comment Successfully Delete');
+
+   }
 }

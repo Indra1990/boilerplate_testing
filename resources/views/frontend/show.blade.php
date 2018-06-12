@@ -3,6 +3,7 @@
 @section('title', app_name() . ' | '.__('navs.general.home'))
 
 @section('content')
+
   <meta name="_token" content="{{ csrf_token() }}" />
 
   <!-- Page Content -->
@@ -32,16 +33,27 @@
         <!-- Single Comment -->
           @foreach ($quote->comments as $comment)
             <div class="media mb-4" >
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+              <img class="d-flex mr-3 rounded-circle imgComment" src="@if(!empty($comment->user->avatar_location )){{ asset($comment->user->avatar_location) }} @else http://placehold.it/50x50 @endif" alt="">
               <div class="media-body">
                 <h5 class="mt-0" >{{$comment->user->name}}</h5>
                 {{ $comment->subject}}
-                <br>
+                <br><br>
               {{--<a href="{{url('/show/'.$comment->id.'/edit')}}" class="btn btn-default ">Edit</a>--}}
-            @if ($comment->isOwner())
-              <a href="{{url('/show/'.$comment->id.'/edit')}}"  class="btn btn-primary">Edit</a>
-            @endif
 
+            @if ($comment->isOwner())
+              <div class="btn-group " role="group">
+
+              <button href="{{url('/show/'.$comment->id.'/edit')}}"  class="btn btn-outline-primary">Edit</button>
+
+              <form action="{{url('/show/'.$comment->id)}}" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="_method" value="DELETE">
+                <input  type="submit" class="btn btn-outline-danger" value="Delete">
+                {{-- <button type="button" name="button" class="btn btn-outline-danger" >DELETE</button> --}}
+              </form>
+            </div>
+            @endif
+              <hr>
               </div>
             </div>
           @endforeach
@@ -116,7 +128,7 @@
                 <ul class="list-unstyled mb-0">
                   @foreach ($tags as $tag)
                     <li>
-                      <a href="#">{{$tag->tag_name}}</a>
+                      <a  href="{{url('/filter/'.$tag->slug)}}">{{$tag->tag_name}}</a>
                     </li>
                   @endforeach
                 </ul>
