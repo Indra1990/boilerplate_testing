@@ -46,7 +46,7 @@
 
             @endif
 
-          {{--   <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'open') }}">
+             {{-- <li class="nav-item nav-dropdown {{ active_class(Active::checkUriPattern('admin/log-viewer*'), 'open') }}">
                 <a class="nav-link nav-dropdown-toggle" href="#">
                     <i class="icon-list"></i> {{ __('menus.backend.log-viewer.main') }}
                 </a>
@@ -62,14 +62,14 @@
                             {{ __('menus.backend.log-viewer.logs') }}
                         </a>
                     </li>
-                </ul>--}}
+                </ul> --}}
             </li>
-
-          {{--  <li class="nav-item">
+            {{--
+           <li class="nav-item">
                 <a class="nav-link {{ active_class(Active::checkUriPattern('admin/log-viewer')) }}" href="{{ route('log-viewer::dashboard') }}">
                     {{ __('menus.backend.log-viewer.dashboard') }}
                 </a>
-            </li>--}}
+            </li> --}}
 
         </ul>
     </nav>

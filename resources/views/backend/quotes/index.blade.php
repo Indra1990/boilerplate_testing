@@ -35,6 +35,7 @@
                       <tr>
                         <th>Title</th>
                         <th>Subject</th>
+                        <th>Tags</th>
                         <th>Action</th>
 
                       </tr>
@@ -43,7 +44,21 @@
                       @foreach ($quotes as $quote)
                       <tr id="quote{{$quote->id}}">
                         <td>{{ $quote->title }}</td>
-                        <td>{{ $quote->subject}}</td>
+                        <td>{!! $quote->subject !!}</td>
+                        <td>
+                        @foreach ($quote->tags as $tag)
+                          @if ($tag->tag_name == "aku adalah aku")
+                            <span class="badge badge-pill badge-primary">{{$tag->tag_name}}</span>
+                          @endif
+                          @if ($tag->tag_name == "aku senag sekali")
+                            <span class="badge badge-pill badge-danger">{{$tag->tag_name}}</span>
+                          @endif
+                          @if ($tag->tag_name == "aku anak indonesia")
+                            <span class="badge badge-pill badge-success">{{$tag->tag_name}}</span>
+                          @endif
+                          <br>
+                        @endforeach
+                        </td>
                         <td>
                           <a href="{{ url('admin/quotes/edit/'.$quote->slug) }}" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                           <a href="{{ url('admin/quotes/show/'.$quote->title) }}" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i></a>

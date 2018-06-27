@@ -15,16 +15,19 @@ class TagsTableSeeder extends Seeder
       DB::table('tags')->insert([
         [
          'tag_name' => "aku cinta indonesia",
+         'slug' => 'aku-cinta-indonesia',
          'created_at' => date('Y-m-d H:i:s'),
          'updated_at' => date('Y-m-d H:i:s'),
        ],
        [
         'tag_name' => "aku adalah aku",
+        'slug' => 'aku-adalah-aku',
         'created_at' => date('Y-m-d H:i:s'),
         'updated_at' => date('Y-m-d H:i:s'),
       ],
       [
        'tag_name' => "cinta gila",
+       'slug' => 'cinta-gila',
        'created_at' => date('Y-m-d H:i:s'),
        'updated_at' => date('Y-m-d H:i:s'),
      ],

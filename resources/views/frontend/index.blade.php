@@ -25,10 +25,18 @@
               <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
               <div class="card-body">
                 <h2 class="card-title">{{$quote->title}}</h2>
-                <p class="card-text">{{$quote->subject}}</p>
+                <p class="card-text">{!!$quote->subject!!}</p>
                 <div class="flex center">
                 @foreach ($quote->tags as $tag)
-                  <a href="{{url('/filter/'.$tag->slug)}}"><span class="badge badge-pill badge-danger"><i class="fa fa-tags"></i> {{ $tag->tag_name }}</span></a>
+                  @if ($tag->tag_name == "aku adalah aku")
+                    <a href="{{url('/filter/'.$tag->slug)}}"><span class="badge badge-pill badge-primary"><i class="fa fa-tags"></i> {{$tag->tag_name}}</span></a>
+                  @endif
+                  @if ($tag->tag_name == "aku senag sekali")
+                    <a href="{{url('/filter/'.$tag->slug)}}"><span class="badge badge-pill badge-danger"><i class="fa fa-tags"></i> {{$tag->tag_name}}</span></a>
+                  @endif
+                  @if ($tag->tag_name == "aku anak indonesia")
+                    <a href="{{url('/filter/'.$tag->slug)}}"><span class="badge badge-pill badge-success"><i class="fa fa-tags"></i> {{$tag->tag_name}}</span></a>
+                  @endif
                 @endforeach
               </div>
               <br>
@@ -84,7 +92,16 @@
                     <ul class="list-unstyled mb-0">
                       @foreach ($tags as $tag)
                         <li>
-                          <a href="{{url('/filter/'.$tag->slug)}}">{{$tag->tag_name}}</a>
+                          {{-- <a href="{{url('/filter/'.$tag->slug)}}">{{$tag->tag_name}}</a> --}}
+                          @if ($tag->tag_name == "aku adalah aku")
+                            <a href="{{url('/filter/'.$tag->slug)}}"><span class="badge badge-pill badge-primary"><i class="fa fa-tags"></i> {{$tag->tag_name}}</span></a>
+                          @endif
+                          @if ($tag->tag_name == "aku senag sekali")
+                            <a href="{{url('/filter/'.$tag->slug)}}"><span class="badge badge-pill badge-danger"><i class="fa fa-tags"></i> {{$tag->tag_name}}</span></a>
+                          @endif
+                          @if ($tag->tag_name == "aku anak indonesia")
+                            <a href="{{url('/filter/'.$tag->slug)}}"><span class="badge badge-pill badge-success"><i class="fa fa-tags"></i> {{$tag->tag_name}}</span></a>
+                          @endif
                         </li>
                       @endforeach
                     </ul>

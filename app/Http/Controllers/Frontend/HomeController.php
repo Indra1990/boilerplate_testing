@@ -37,9 +37,13 @@ class HomeController extends Controller
     public function show($slug)
     {
        $quote = Quote::with('comments.user')->where('slug', $slug)->first();
-       //$quote = Quote::where('slug',$slug)->first();
+       $points = $quote->views + 1;
+       $quote->update([
+         'views'   => $points,
+       ]);
+
        $tags = Tag::all();
-       return view('frontend.show', compact('quote','tags'));
+       return view('frontend.show', compact('quote','tags', 'views'));
     }
 
     public function filterTag($tag)

@@ -19,14 +19,14 @@
         <!-- Author -->
         <hr>
         <!-- Date/Time -->
-        <p>  Posted on {{ date('d-m-Y', strtotime($quote->created_at)) }} by <a href="#">{{ $quote->user->name }}</a></p>
+        <p>  Posted on {{ date('d-m-Y', strtotime($quote->created_at)) }} by <a href="#">{{ $quote->user->name }}</a> <span class="pull-right">views : {{ $quote->views }}</span> </p>
         <hr>
         <!-- Preview Image -->
         <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
         <hr>
 
         <!-- Post Content -->
-        <p class="lead"> {{$quote->subject}}</p>
+        <p class="lead"> {!!$quote->subject !!}</p>
 
         <hr>
 
@@ -43,7 +43,7 @@
             @if ($comment->isOwner())
               <div class="btn-group " role="group">
 
-              <button href="{{url('/show/'.$comment->id.'/edit')}}"  class="btn btn-outline-primary">Edit</button>
+              <a href="{{url('/show/'.$comment->id.'/edit')}}"  class="btn btn-outline-primary">Edit</a>
 
               <form action="{{url('/show/'.$comment->id)}}" method="post">
                 {{ csrf_field() }}

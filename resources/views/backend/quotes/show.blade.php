@@ -19,7 +19,7 @@
               </div><!--card-header-->
                 <div class="card-block">
                   <div class="jumbotron">
-                    <p>{{$quote->subject}}</p>
+                    <p>{!!$quote->subject !!}</p>
                     <p>Di Tulis Oleh : <a href="">{{ $quote->user->name }}</a></p>
                     <a href="{{url('/admin/quotes')}}" class="btn btn-primary">kembali ke index</a>
 
