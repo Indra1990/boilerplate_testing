@@ -14,7 +14,7 @@
               </div><!--card-header-->
                 <div class="card-block">
 
-                  <form action="{{ url('/admin/quotes/edit/'.$quote->id) }}" method="POST">
+                  <form action="{{ url('/admin/quotes/edit/'.$quote->id) }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -56,10 +56,17 @@
                       @endforeach
                     </select>
                     </div>
-
+                    {{-- <div class="form-group">
+                        <input type="file" name="photos[]" multiple  id="file" onchange="return fileValidate()"/>
+                    </div> --}}
                     <button type="submit" class="btn btn-success">Submit</button>
                   </form>
 
+                   {{-- @foreach ($photo as $key)
+                  <img src="{{ asset('/img/frontend/quoteImage/'.$key->filename) }}" alt="..." class="rounded float-left" style="width: 250px; height:200px: margin:10px;">
+
+                     <img class="d-block w-100" src="{{ asset('/img/frontend/quoteImage/'.$key->filename) }}" alt="">
+                  @endforeach --}}
                 </div>
             </div>
         </div>

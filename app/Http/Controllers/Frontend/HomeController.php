@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Auth\Quote;
 use App\Models\Auth\User;
 use App\Models\Auth\Tag;
+use App\Models\Auth\Photo;
 use App\Models\Auth\Comment;
 use Illuminate\Http\Request;
 
@@ -36,14 +37,16 @@ class HomeController extends Controller
 
     public function show($slug)
     {
-       $quote = Quote::with('comments.user')->where('slug', $slug)->first();
+       $quote = Quote::with('comments.user.photos')->where('slug', $slug)->first();
+       // $photo = Photo::with('quote')->get();
+       $photo = $quote->photos()->get();
        $points = $quote->views + 1;
        $quote->update([
          'views'   => $points,
        ]);
 
        $tags = Tag::all();
-       return view('frontend.show', compact('quote','tags', 'views'));
+       return view('frontend.show', compact('quote','tags', 'views','photo'));
     }
 
     public function filterTag($tag)

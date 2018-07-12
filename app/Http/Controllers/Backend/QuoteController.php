@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Input;
 use Image;
 use Storage;
 use Validator;
-use App\Http\Requests\UploadRequest;
 
 class QuoteController extends Controller
 {
@@ -31,7 +30,7 @@ class QuoteController extends Controller
     return view('backend.quotes.create',compact('tags'));
   }
 
-  public function store(UploadRequest $request)
+  public function store(Request $request)
   {
 
     //validation tags
@@ -51,20 +50,27 @@ class QuoteController extends Controller
       'user_id' => \Auth::user()->id
       ]);
 
+        $photos = $request->photos;
+        if ($photos != null) {
+          foreach ($photos as $image) {
+                // $filename=$image->store('photos');
+                $filename = $image->getClientOriginalName();
+                $destinationPath = 'img/frontend/quoteImage';
 
-      if(!empty($request->photos))
-        foreach ($request->photos as $image) {
-              $filename=$image->store('photos');
-              $destinationPath = 'photo';
-              $image->move($destinationPath, $filename);
+                $image->move($destinationPath, $filename);
 
-                Photo::create([
-                  'quote_id'   => $quotes->id,
-                  'filename' => $filename
-                ]);
+                 Photo::create([
+                    'filename' => $filename,
+                    'quote_id' => $quotes->id
+                  ]);
+
+              // $imageId->quotes()->attach($quotes->id);
+
+          }
         }
 
-      $quotes->tags()->attach($request->tags);
+        $quotes->tags()->attach($request->tags);
+
 
       return redirect()->action('Backend\QuoteController@index')->with('success','Successfully Create Quote');
   }
@@ -79,11 +85,9 @@ class QuoteController extends Controller
   {
     $quote = Quote::where('slug',$title)->first();
       $tags = Tag::all();
+      $photo = $quote->photos()->get();
 
-      //
-      //$tags = Tag::pluck('tag_name')->all();
-      // $selected = $quote->tags->pluck('tag_name')->all();
-    return view('backend.quotes.edit', compact('quote','tags'));
+      return view('backend.quotes.edit', compact('quote','tags','photo'));
 
   }
 
@@ -98,28 +102,66 @@ class QuoteController extends Controller
     if(empty($request->tags))
    return back()->withInput($request->input())->with('tag_error','Tag Tidak Boleh Kosong');
 
+     $slug = str_slug($request->title,'-');
+     if (Quote::where('slug',$slug)->first() !=null)
+       $slug = $slug ;
     //$quote = Quote::where('title',$title)->first();
     $quote = Quote::find($id);
 
     $quote->update([
       'title'   => $request->title,
+      'slug'   => $slug,
       'subject' => $request->subject,
       'user_id' => \Auth::user()->id
+    ]);
 
-      ]);
+    // $photos = $request->file('photos');
+    //
+    // // $photos = $request->photos;
+    // // $photos = $quote->photos;
+    // foreach ($photos as $image) {
+    //
+    //   $filename = $image->getClientOriginalName();
+    //   $destinationPath = 'img/frontend/quoteImage';
+    //
+
+    //   $image->move($destinationPath, $filename);
+    //
+    //   $photo = new Photo;
+    //   $photo->quote_id = $quote->id;
+    //   // $oldfile = $photo->filename;
+    //   $photo->filename = $filename;
+    //
+    //   $photo->save();
+    //
+    //   \File::delete($destinationPath.$photo->filename);
+    //
+    // // \File::delete($destinationPath.$oldfile);  // or unlink($filename);
+    //
+    // }
+
       $quote->tags()->sync($request->tags);
 
-      return redirect()->action('Backend\QuoteController@index')->with('success','Successfully Update Quote');
+      // return redirect()->action('Backend\QuoteController@index')->with('success','Successfully Update Quote');
+       return redirect()->action('Backend\PhotoController@editImage',$quote->slug);
 
   }
 
   public function destroy($id)
   {
-    $quote = quote::destroy($id);
+    $quote = quote::findOrFail($id);
+    $filename= $quote->photos;
+
+    foreach ($filename as $key) {
+      \File::delete(public_path('/img/frontend/quoteImage/'.$key->filename));
+    }
+
+    $quote->delete();
 
     return response()->json([
-        $quote,
-        'delete' => 'success'
+      'code' => '200',
+      'delete' => 'success',
+        $quote
     ]);
   }
 

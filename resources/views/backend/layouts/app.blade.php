@@ -19,6 +19,9 @@
     <!-- Check if the language is set to RTL, so apply the RTL layouts -->
     <!-- Otherwise apply the normal LTR layouts -->
     {{ style(mix('css/backend.css')) }}
+    {{-- <link rel="stylesheet" href="{{asset('css/thumbnail-gallery.css')}}"> --}}
+    {{-- @stack('') --}}
+
     @stack('after-styles')
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

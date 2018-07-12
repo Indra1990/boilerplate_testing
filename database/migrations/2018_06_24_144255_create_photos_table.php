@@ -17,9 +17,10 @@ class CreatePhotosTable extends Migration
             $table->increments('id');
             $table->string('filename');
             $table->integer('quote_id')->unsigned();
+            $table->timestamps();
 
             $table->foreign('quote_id')->references('id')->on('quotes')->onDelete('cascade')->onUpdate('cascade');
-            $table->timestamps();
+
         });
     }
 

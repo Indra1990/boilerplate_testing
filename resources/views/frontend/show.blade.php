@@ -21,10 +21,28 @@
         <!-- Date/Time -->
         <p>  Posted on {{ date('d-m-Y', strtotime($quote->created_at)) }} by <a href="#">{{ $quote->user->name }}</a> <span class="pull-right">views : {{ $quote->views }}</span> </p>
         <hr>
-        <!-- Preview Image -->
-        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
-        <hr>
 
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+          <div class="carousel-inner">
+            @for ($i=0; $i < count($photo); $i++)
+              <div class="carousel-item {{$i == 0 ? 'active': ''}}">
+                <img class="d-block w-100" src="{{ asset('/img/frontend/quoteImage/'.$photo[$i]['filename']) }}" alt="{{$photo[$i]['filename']}}">
+              </div>
+            @endfor
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+        <hr>
+{{-- http://placehold.it/900x300  --}}
         <!-- Post Content -->
         <p class="lead"> {!!$quote->subject !!}</p>
 
@@ -75,9 +93,6 @@
             </form>
           </div>
         </div>
-
-
-
 
 
         <!-- Start Modal -->
@@ -163,7 +178,9 @@
   <script type="text/javascript">
   $(document).ready(function(){
 
-
+    // $('.carousel').carousel({
+    //   interval: 2000
+    // })
   // $('.open_modal').click(function(){
   //     var comment_id = $(this).val();
        //var id = $(this).val("id");
@@ -182,4 +199,5 @@
 });
 //   http://www.expertphp.in/article/laravel-5-ajax-crud-example-to-build-web-application-without-page-refresh
   </script>
+
 @endsection

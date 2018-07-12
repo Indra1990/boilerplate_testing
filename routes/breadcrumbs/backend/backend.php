@@ -36,7 +36,7 @@ Breadcrumbs::register('admin.quotes.show', function ($breadcrumbs,$title) {
 //edit quote admin
 Breadcrumbs::register('admin.quotes.edit', function ($breadcrumbs,$title) {
     $breadcrumbs->parent('admin.quotes');
-    $breadcrumbs->push(__('Edit '), route('admin.quotes.edit',$title));
+    $breadcrumbs->push(__('Edit'), route('admin.quotes.edit',$title));
 });
 
 //index tags admin
@@ -57,5 +57,9 @@ Breadcrumbs::register('admin.tags.edit', function ($breadcrumbs,$tag_name) {
     $breadcrumbs->push(__('Edit'), route('admin.tags.edit',$tag_name));
 });
 
+Breadcrumbs::register('admin.quotes.editImage', function ($breadcrumbs,$title) {
+    $breadcrumbs->parent('admin.quotes');
+    $breadcrumbs->push(__('Edit Image'), route('admin.quotes.editImage',$title));
+});
 require __DIR__.'/auth.php';
 require __DIR__.'/log-viewer.php';
