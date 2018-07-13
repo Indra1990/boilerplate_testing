@@ -83,11 +83,14 @@ class QuoteController extends Controller
 
   public function edit($title)
   {
-    $quote = Quote::where('slug',$title)->first();
+      $selected = [];
+      $quote = Quote::where('slug',$title)->first();
       $tags = Tag::all();
-      $photo = $quote->photos()->get();
+      foreach ($quote->tags as $selectedIds) {
+      $selected[] = $selectedIds->id;
+      }
 
-      return view('backend.quotes.edit', compact('quote','tags','photo'));
+      return view('backend.quotes.edit', compact('quote','tags','selected'));
 
   }
 
@@ -144,7 +147,6 @@ class QuoteController extends Controller
 
       // return redirect()->action('Backend\QuoteController@index')->with('success','Successfully Update Quote');
        return redirect()->action('Backend\PhotoController@editImage',$quote->slug);
-
   }
 
   public function destroy($id)

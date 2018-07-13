@@ -22,7 +22,12 @@
                     <div class="card">
                       <img class="card-img-top"  src="{{ asset('img/frontend/quoteImage/'.$key->filename) }}"  alt="Card image cap">
                       <div class="card-body">
-                          <p class="card-text"><a href="#" class="btn btn-primary">Delete Image</a></p>
+                          <p class="card-text">
+                            <form  action="{{ url('admin/quotes/editImage/'.$key->id)}}" method="post">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="_method" value="DELETE">
+                              <input  type="submit" class="btn btn-danger" value="Delete">
+                            </form>
                       </div>
                     </div>
 
@@ -30,7 +35,9 @@
 
                 </div><!--card-group-->
                 <br>
-                <form class="" action="index.html" method="post">
+                <form  action="{{ url('/admin/quotes/editImage/'.$quote->slug) }}" method="post" enctype="multipart/form-data">
+                  {{ csrf_field() }}
+
                   <div class="form-group">
                       <input type="file" name="photos[]" multiple  id="file" onchange="return fileValidate()"/>
                   </div>

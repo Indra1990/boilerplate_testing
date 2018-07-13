@@ -47,26 +47,17 @@
                     <div class="form-group">
                       <label>Tag Maximal 3 :</label>
                       <br>
-
-                    <select class="js-example-basic-multiple form-control" name="tags[]" multiple="multiple">
-                      @foreach ($quote->tags as $oldtag)
+                      <select class="js-example-basic-multiple form-control" name="tags[]" multiple="multiple">
                           @foreach ($tags as $tag)
-                            <option value="{{$tag->id}}" @if($oldtag->id == $tag->id) selected="selected" @endif>{{$tag->tag_name}}</option>
+                          <option value="{{$tag->id}}" @if(in_array($tag->id, $selected)) selected="selected" @endif>{{$tag->tag_name}}</option>
                           @endforeach
-                      @endforeach
-                    </select>
+                      </select>
                     </div>
-                    {{-- <div class="form-group">
-                        <input type="file" name="photos[]" multiple  id="file" onchange="return fileValidate()"/>
-                    </div> --}}
+
                     <button type="submit" class="btn btn-success">Submit</button>
                   </form>
 
-                   {{-- @foreach ($photo as $key)
-                  <img src="{{ asset('/img/frontend/quoteImage/'.$key->filename) }}" alt="..." class="rounded float-left" style="width: 250px; height:200px: margin:10px;">
 
-                     <img class="d-block w-100" src="{{ asset('/img/frontend/quoteImage/'.$key->filename) }}" alt="">
-                  @endforeach --}}
                 </div>
             </div>
         </div>

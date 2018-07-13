@@ -20,6 +20,8 @@ Route::delete('quotes/{id}', 'QuoteController@destroy')->name('quotes.delete');
 
 //route for quote Image
 Route::get('quotes/editImage/{title}', 'PhotoController@editImage')->name('quotes.editImage');
+Route::post('quotes/editImage/{id}', 'PhotoController@updateImage')->name('quotes.editImage');
+Route::delete('quotes/editImage/{id}', 'PhotoController@deleteImage')->name('quotes.editImage');
 
 //route for tags
 Route::get('tags', 'TagController@index')->name('tags');

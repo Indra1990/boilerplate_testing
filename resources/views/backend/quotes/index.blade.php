@@ -47,13 +47,13 @@
                         <td>{!! $quote->subject !!}</td>
                         <td>
                         @foreach ($quote->tags as $tag)
-                          @if ($tag->tag_name == "aku adalah aku")
+                          @if ($tag->tag_name == "aku cinta indonesia")
                             <span class="badge badge-pill badge-primary">{{$tag->tag_name}}</span>
                           @endif
-                          @if ($tag->tag_name == "aku senag sekali")
+                          @if ($tag->tag_name == "cinta gila")
                             <span class="badge badge-pill badge-danger">{{$tag->tag_name}}</span>
                           @endif
-                          @if ($tag->tag_name == "aku anak indonesia")
+                          @if ($tag->tag_name == "aku adalah aku")
                             <span class="badge badge-pill badge-success">{{$tag->tag_name}}</span>
                           @endif
                           <br>
